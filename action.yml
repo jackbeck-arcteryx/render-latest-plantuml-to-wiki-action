@@ -7,7 +7,7 @@
 # therefore be used in private repositories.
 
 name: Render PlantUML to Wiki Extended
-description: Renders PlantUML diagrams and pushes the generated PNG files to your repo's wiki, forked from frederikheld to allow more customization
+description: Action forked from frederikheld to allow more customization, published png to wiki from plantuml
 branding:
     icon: file-text
     color: blue
