@@ -6,8 +6,8 @@
 # doesnt leak your documentation to the public and can
 # therefore be used in private repositories.
 
-name: Render PlantUML to Wiki
-description: Renders PlantUML diagrams and pushes the generated PNG files to your repo's wiki
+name: Render PlantUML to Wiki Extended
+description: Renders PlantUML diagrams and pushes the generated PNG files to your repo's wiki, forked from frederikheld to allow more customization
 branding:
     icon: file-text
     color: blue
@@ -30,3 +30,4 @@ runs:
         - ${{ inputs.WIKI_TOKEN }}
         - ${{ inputs.INPUT_DIR }}
         - ${{ inputs.OUTPUT_DIR }}
+        - ${{ inputs.JAVA_ARGS }}
