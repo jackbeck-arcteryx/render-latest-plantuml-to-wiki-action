@@ -18,7 +18,7 @@ Now add the following lines to your workflow script:
 
 ```sh
     - name: Render PlantUML to wiki
-      uses: frederikheld/render-plantuml-to-wiki-action@v1.0.1
+      uses: cjgibbons/render-latest-plantuml-to-wiki-action@v1.0
       with:
         WIKI_TOKEN: ${{ secrets.WIKI_TOKEN }}
         INPUT_DIR: 'path/to/input_directory'
