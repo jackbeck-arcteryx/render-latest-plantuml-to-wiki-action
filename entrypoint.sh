@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Exit immediately if a command exits with a non-zero status:
 #set -e
@@ -79,7 +79,7 @@ fi
 
 echo "=> Moving generated files to /${artifacts_upload_dir} in wiki repo ..."
 mkdir -p "${GITHUB_WORKSPACE}/artifacts_repo/${artifacts_upload_dir}"
-yes | cp --recursive --force "${GITHUB_WORKSPACE}/${local_output_dir}/." "${GITHUB_WORKSPACE}/artifacts_repo/${artifacts_upload_dir}"
+cp -rf "${GITHUB_WORKSPACE}/${local_output_dir}/." "${GITHUB_WORKSPACE}/artifacts_repo/${artifacts_upload_dir}"
 
 echo "=> Committing artifacts ..."
 cd "${GITHUB_WORKSPACE}/artifacts_repo"
