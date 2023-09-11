@@ -39,7 +39,8 @@ input_files=$(find "$local_input_dir" -type f -name '*' -print)
 
 echo "=> Downloading PlantUML Java app ..."
 # wget --quiet -O plantuml.jar https://sourceforge.net/projects/plantuml/files/plantuml.1.2020.15.jar/download
-wget --quiet -O plantuml.jar https://sourceforge.net/projects/plantuml/files/latest/download
+wget --quiet -O plantuml.zip https://sourceforge.net/projects/plantuml/files/latest/download
+unzip plantuml.zip
 
 echo "=> Preparing output dir ..."
 mkdir -p "$local_output_dir"
