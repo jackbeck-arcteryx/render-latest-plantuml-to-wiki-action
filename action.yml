@@ -6,7 +6,7 @@
 # doesnt leak your documentation to the public and can
 # therefore be used in private repositories.
 
-name: Render PlantUML to Wiki Extended
+name: Render Latest PlantUML to Wiki Extended
 description: Action forked from frederikheld to allow more customization, published png to wiki from plantuml
 branding:
     icon: file-text
@@ -24,7 +24,7 @@ inputs:
         default: /output_directory
 
 runs:
-    using: Docker
+    using: docker
     image: Dockerfile
     args:
         - ${{ inputs.WIKI_TOKEN }}
