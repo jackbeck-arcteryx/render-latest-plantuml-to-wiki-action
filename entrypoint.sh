@@ -35,32 +35,36 @@ git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 # git config --global user.email "github-action@users.noreply.github.com"
 
 # Get paths to all files in input directory:
-input_files=$(find "$local_input_dir" -type f -name '*.puml' -print)
+# input_files=$(find "$local_input_dir" -type f -name '*.puml' -print)
 
 echo "=> Downloading PlantUML Java app ..."
 # wget --quiet -O plantuml.jar https://sourceforge.net/projects/plantuml/files/plantuml.1.2020.15.jar/download
 wget --quiet -O plantuml.zip https://sourceforge.net/projects/plantuml/files/latest/download
 unzip plantuml.zip
 
-echo "=> Preparing output dir ..."
+echo "=> Preparing output dir $local_output_dir..."
 mkdir -p "$local_output_dir"
 
 echo "---"
 
 # Run PlantUML for each file path:
-echo "=> Starting render process ..."
-for file in "${input_files[@]}"; do
-    input_filepath=$file
-    output_filepath=$(dirname "$(echo "$file" | sed -e "s@^${local_input_dir}@${local_output_dir}@")")
+echo "=> Starting render process in $local_input_dir..."
 
-    echo " > processing '$input_filepath'"
-    java -jar plantuml.jar -charset UTF-8 "$INPUT_JAVA_ARGS" -output "${GITHUB_WORKSPACE}/${output_filepath}" "${GITHUB_WORKSPACE}/${input_filepath}"
-done
+java -jar plantuml.jar -charset UTF-8 "$INPUT_JAVA_ARGS" -output "${GITHUB_WORKSPACE}/${local_output_dir}" "${GITHUB_WORKSPACE}/${local_input_dir}"
+
+# for file in "${input_files[@]}"; do
+#     input_filepath=$file
+#     output_filepath=$(dirname "$(echo "$file" | sed -e "s@^${local_input_dir}@${local_output_dir}@")")
+#
+#     echo " > processing '$input_filepath'"
+#     java -jar plantuml.jar -charset UTF-8 "$INPUT_JAVA_ARGS" -output "${GITHUB_WORKSPACE}/${output_filepath}" "${GITHUB_WORKSPACE}/${input_filepath}"
+# done
 
 # source: https://unix.stackexchange.com/questions/9496/looping-through-files-with-spaces-in-the-names
 
 echo "=> Generated files:"
-ls -l "${GITHUB_WORKSPACE}/${output_filepath}"
+# ls -l "${GITHUB_WORKSPACE}/${output_filepath}"
+ls -l "${GITHUB_WORKSPACE}/${local_output_dir}"
 
 echo "---"
 
