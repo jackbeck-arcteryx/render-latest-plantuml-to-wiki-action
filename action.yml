@@ -29,9 +29,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Add packages to the image
-      shell: bash
-      run: apt-get -y graphviz
     - name: Call the plantuml and git script
       shell: bash
       env:
