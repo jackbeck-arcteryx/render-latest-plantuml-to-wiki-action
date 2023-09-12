@@ -1,6 +1,6 @@
 #!/bin/bash
 # This script is based on the work by Frederik Held
-# It has been modified to: 
+# It has been modified to:
 #
 #   1. pull the latest version of PlantUML from SourceForge
 #   2. remove the dependency on Docker
@@ -22,8 +22,10 @@ sudo apt-get update && sudo apt-get install -y graphviz
 echo "---"
 
 echo "=> Downloading PlantUML Java app ..."
-wget --quiet -O plantuml.zip https://sourceforge.net/projects/plantuml/files/latest/download
-unzip plantuml.zip
+if [ ! -f plantuml.jar ]; then
+    wget --quiet -O plantuml.zip https://sourceforge.net/projects/plantuml/files/latest/download
+    unzip plantuml.zip
+fi
 echo "---"
 
 echo "=> Preparing output dir $local_output_dir..."
@@ -32,7 +34,7 @@ echo "---"
 
 # Run PlantUML for each file path:
 echo "=> Starting render process in $local_input_dir..."
-java -jar plantuml.jar -charset UTF-8 "$JAVA_ARGS" -output "${GITHUB_WORKSPACE}/${local_output_dir}" "${GITHUB_WORKSPACE}/${local_input_dir}"
+java -jar plantuml.jar -charset UTF-8 "$JAVA_ARGS" -t"$IMAGE_TYPE" -output "${GITHUB_WORKSPACE}/${local_output_dir}" "${GITHUB_WORKSPACE}/${local_input_dir}"
 echo "---"
 
 echo "=> Generated files:"

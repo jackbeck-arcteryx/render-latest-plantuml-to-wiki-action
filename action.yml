@@ -22,6 +22,9 @@ inputs:
   OUTPUT_DIR:
       description: Directory in wiki to write rendered diagrams to
       default: /output_directory
+  IMAGE_TYPE:
+      description: Image type to use for rendering diagrams either png or svg
+      default: png
   JAVA_ARGS:
       description: Additional Java arguments in case images need more memory
       default: "-DPLANTUML_LIMIT_SIZE=8192 -Xmx=1024m"
@@ -39,5 +42,6 @@ runs:
         WIKI_TOKEN: ${{ inputs.WIKI_TOKEN }}
         INPUT_DIR: ${{ inputs.INPUT_DIR }}
         OUTPUT_DIR: ${{ inputs.OUTPUT_DIR }}
+        IMAGE_TYPE: ${{ inputs.IMAGE_TYPE }}
         JAVA_ARGS: ${{ inputs.JAVA_ARGS }}
       run: entrypoint.sh

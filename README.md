@@ -36,6 +36,7 @@ NOTE: The generated files be will named after the `diagram name` specified in `@
 | WIKI_TOKEN | (required) The token you have created above. You can use the token via `${{ secrets.WIKI_TOKEN }}`. If you have named it differently, you need to change the name accordingly.
 | INPUT_DIR | (defaults to `input_directory`) Relative path from the root of your _source code repository_ to the _PlantUML_ source files |
 | OUTPUT_DIR | (defaults to `output_directory`) Relative path from the root of your _wiki repo_<sup>1</sup> to the directory you want to have the generated diagrams being placed in
+| IMAGE_TYPE | (defaults to `png`) The type of image to create. For GitHub Wiki use `png` or `svg`. For other use cases you can use any of the [supported PlantUML types](https://plantuml.com/en/command-line#supported-formats). |
 | JAVA_ARGS | (optional) Any additional arguments to pass to the PlantUML java invocation. The defaults are set to `-DPLANTUML_LIMIT_SIZE=8192 -Xmx=1024m` in order to support large diagrams. |
 
 <sup>1</sup> although the wiki is shown as part of your repository on GitHub, it technically is a separate git repository that you can clone and push changes to. Note that this repo has limited capabilities, e.g. missing support for [Git LFS](https://git-lfs.github.com/)!
@@ -62,5 +63,5 @@ In the same way you can set other attributes that can be used with the HTML `<im
 
 - [X] improve speed of docker build by using/creating an image that comes with pre-installed dependencies (right now the preparation takes >1 minute while the rendering only takes seconds). **Removed the dependency on Docker completely.**
 - [ ] split into two separate actions: render to artifact & push artifact to wiki
-- [ ] allow generation of different file types than PNG
+- [X] allow generation of different file types than PNG. **All supported PlantUML types are now available with setting `IMAGE_TYPE`. Default remains `png` if unspecified.
 - [ ] allow user to set git config user.name and user.email via env variables
