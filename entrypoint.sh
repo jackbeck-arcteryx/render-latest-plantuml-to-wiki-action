@@ -38,7 +38,7 @@ git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 # input_files=$(find "$local_input_dir" -type f -name '*.puml' -print)
 
 echo "=> Install graphviz ..."
-apt-get update && apt-get install -y graphviz
+sudo apt-get update && sudo apt-get install -y graphviz
 
 echo "=> Downloading PlantUML Java app ..."
 # wget --quiet -O plantuml.jar https://sourceforge.net/projects/plantuml/files/plantuml.1.2020.15.jar/download
