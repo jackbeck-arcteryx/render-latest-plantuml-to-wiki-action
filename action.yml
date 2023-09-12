@@ -6,7 +6,7 @@
 # doesnt leak your documentation to the public and can
 # therefore be used in private repositories.
 
-name: Render Latest PlantUML to Wiki Extended
+name: Render PlantUML to Wiki using latest PlantUML release
 description: Action forked from frederikheld to allow more customization, published png to wiki from plantuml
 branding:
   icon: file-text
@@ -29,7 +29,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-
     - name: Setup GitHub Action PATH
       shell: bash
       run: echo "${{ github.action_path }}" >> $GITHUB_PATH
