@@ -33,10 +33,10 @@ NOTE: The generated files be will named after the `diagram name` specified in `@
 
 | Variable | Expected content |
 | - | - |
-| WIKI_TOKEN | The token you have created above. You can use the token via `${{ secrets.WIKI_TOKEN }}`. If you have named it differently, you need to change the name accordingly.
-| INPUT_DIR | Relative path from the root of your _source code repository_ to the _PlantUML_ source files |
-| OUTPUT_DIR | Relative path from the root of your _wiki repo_<sup>1</sup> to the directory you want to have the generated diagrams being placed in
-| JAVA_ARGS | Any additional arguments to pass to the PlantUML java invocation. The defaults are set to `-DPLANTUML_LIMIT_SIZE=8192 -Xmx=1024m` in order to support larg diagrams. |
+| WIKI_TOKEN | (required) The token you have created above. You can use the token via `${{ secrets.WIKI_TOKEN }}`. If you have named it differently, you need to change the name accordingly.
+| INPUT_DIR | (defaults to `input_directory`) Relative path from the root of your _source code repository_ to the _PlantUML_ source files |
+| OUTPUT_DIR | (defaults to `output_directory`) Relative path from the root of your _wiki repo_<sup>1</sup> to the directory you want to have the generated diagrams being placed in
+| JAVA_ARGS | (optional) Any additional arguments to pass to the PlantUML java invocation. The defaults are set to `-DPLANTUML_LIMIT_SIZE=8192 -Xmx=1024m` in order to support large diagrams. |
 
 <sup>1</sup> although the wiki is shown as part of your repository on GitHub, it technically is a separate git repository that you can clone and push changes to. Note that this repo has limited capabilities, e.g. missing support for [Git LFS](https://git-lfs.github.com/)!
 
