@@ -9,25 +9,37 @@
 name: Render Latest PlantUML to Wiki Extended
 description: Action forked from frederikheld to allow more customization, published png to wiki from plantuml
 branding:
-    icon: file-text
-    color: blue
+  icon: file-text
+  color: blue
 
 inputs:
-    WIKI_TOKEN:
-        description: Secure token to access wiki repo
-        required: true
-    INPUT_DIR:
-        description: Directory in repo to read PlantUML source files from
-        default: /input_directory
-    OUTPUT_DIR:
-        description: Directory in wiki to write rendered diagrams to
-        default: /output_directory
+  WIKI_TOKEN:
+      description: Secure token to access wiki repo
+      required: true
+  INPUT_DIR:
+      description: Directory in repo to read PlantUML source files from
+      default: /input_directory
+  OUTPUT_DIR:
+      description: Directory in wiki to write rendered diagrams to
+      default: /output_directory
+  JAVA_ARGS:
+      description: Additional Java arguments in case images need more memory
+      default: "-DPLANTUML_LIMIT_SIZE=8192 -Xmx=1024m"
 
 runs:
-    using: docker
-    image: Dockerfile
-    args:
-        - ${{ inputs.WIKI_TOKEN }}
-        - ${{ inputs.INPUT_DIR }}
-        - ${{ inputs.OUTPUT_DIR }}
-        - ${{ inputs.JAVA_ARGS }}
+  using: "composite"
+  steps:
+    - name: Add packages to the image
+      shell: bash
+      run: apt-get -y graphviz
+    - name: Call the plantuml and git script
+      shell: bash
+      env:
+        WIKI_TOKEN: ${{ inputs.WIKI_TOKEN }}
+        INPUT_DIR: ${{ inputs.INPUT_DIR }}
+        OUTPUT_DIR: ${{ inputs.OUTPUT_DIR }}
+        JAVA_ARGS: ${{ input.JAVA_ARGS }}
+        GITHUB_ACTOR: ${{ GITHUB_ACTOR }}
+        GITHUB_REPOSITORY: ${{ GITHUB_REPOSITORY }}
+        GITHUB_WORKSPACE: ${{ GITHUB_WORKSPACE }}
+      run: ./entrypoint.sh

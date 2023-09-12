@@ -4,11 +4,11 @@
 #set -e
 
 # Set paths inside Docker container:
-local_input_dir=$INPUT_INPUT_DIR
+local_input_dir=$INPUT_DIR
 local_output_dir="output"
 
-artifacts_repo="https://${INPUT_WIKI_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git"
-artifacts_upload_dir=$INPUT_OUTPUT_DIR
+artifacts_repo="https://${WIKI_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git"
+artifacts_upload_dir=$OUTPUT_DIR
 
 # Print debug info:
 # echo "DEBUG: all variables"
@@ -50,7 +50,7 @@ echo "---"
 # Run PlantUML for each file path:
 echo "=> Starting render process in $local_input_dir..."
 
-java -jar plantuml.jar -charset UTF-8 "$INPUT_JAVA_ARGS" -output "${GITHUB_WORKSPACE}/${local_output_dir}" "${GITHUB_WORKSPACE}/${local_input_dir}"
+java -jar plantuml.jar -charset UTF-8 "$JAVA_ARGS" -output "${GITHUB_WORKSPACE}/${local_output_dir}" "${GITHUB_WORKSPACE}/${local_input_dir}"
 
 # for file in "${input_files[@]}"; do
 #     input_filepath=$file
@@ -102,17 +102,17 @@ fi
 
 # Print success message:
 echo "=> Done."
-echo "---"
+# echo "---"
 
 # Print embed tags to help the user:
-echo "You can use the following tags to embed the generated images into wiki pages:"
-output_files=$(find "${GITHUB_WORKSPACE}/artifacts_repo/${artifacts_upload_dir}" -type f -name '*' -print)
-
-ORIGINAL_IFS="$IFS"
-IFS='
-'
-for file in "${output_files[@]}"; do
-	filename=$(basename "$file")
-	echo "[[$(echo "$file" | sed -e "s@^${GITHUB_WORKSPACE}/artifacts_repo@@")|alt=${filename%.*}]]"
-done
-IFS="$ORIGINAL_IFS"
+# echo "You can use the following tags to embed the generated images into wiki pages:"
+# output_files=$(find "${GITHUB_WORKSPACE}/artifacts_repo/${artifacts_upload_dir}" -type f -name '*' -print)
+#
+# ORIGINAL_IFS="$IFS"
+# IFS='
+# '
+# for file in "${output_files[@]}"; do
+# 	filename=$(basename "$file")
+# 	echo "[[$(echo "$file" | sed -e "s@^${GITHUB_WORKSPACE}/artifacts_repo@@")|alt=${filename%.*}]]"
+# done
+# IFS="$ORIGINAL_IFS"
