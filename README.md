@@ -63,5 +63,5 @@ In the same way you can set other attributes that can be used with the HTML `<im
 
 - [X] improve speed of docker build by using/creating an image that comes with pre-installed dependencies (right now the preparation takes >1 minute while the rendering only takes seconds). **Removed the dependency on Docker completely.**
 - [ ] split into two separate actions: render to artifact & push artifact to wiki
-- [X] allow generation of different file types than PNG. **All supported PlantUML types are now available with setting `IMAGE_TYPE`. Default remains `png` if unspecified.
+- [X] allow generation of different file types than PNG. **All supported PlantUML types are now available** with setting `IMAGE_TYPE`. Default remains `png` if unspecified.
 - [ ] allow user to set git config user.name and user.email via env variables
