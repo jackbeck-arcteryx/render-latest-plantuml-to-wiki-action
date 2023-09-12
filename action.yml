@@ -38,8 +38,5 @@ runs:
         WIKI_TOKEN: ${{ inputs.WIKI_TOKEN }}
         INPUT_DIR: ${{ inputs.INPUT_DIR }}
         OUTPUT_DIR: ${{ inputs.OUTPUT_DIR }}
-        JAVA_ARGS: ${{ input.JAVA_ARGS }}
-        GITHUB_ACTOR: ${{ GITHUB_ACTOR }}
-        GITHUB_REPOSITORY: ${{ GITHUB_REPOSITORY }}
-        GITHUB_WORKSPACE: ${{ GITHUB_WORKSPACE }}
+        JAVA_ARGS: ${{ inputs.JAVA_ARGS }}
       run: ./entrypoint.sh
