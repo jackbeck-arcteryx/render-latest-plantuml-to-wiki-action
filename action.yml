@@ -23,7 +23,7 @@ inputs:
       description: Directory in wiki to write rendered diagrams to
       default: /output_directory
   IMAGE_TYPE:
-      description: Image type to use for rendering diagrams either png or svg
+      description: Image type to use for rendering diagrams supported by PlantUML 
       default: png
   JAVA_ARGS:
       description: Additional Java arguments in case images need more memory
