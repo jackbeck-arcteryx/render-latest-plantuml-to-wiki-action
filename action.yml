@@ -15,7 +15,8 @@ branding:
 inputs:
   WIKI_TOKEN:
       description: Secure token to access wiki repo
-      required: true
+  GHAPP_TOKEN:
+      description: Secure token to access wiki repo using GitHub Apps token
   INPUT_DIR:
       description: Directory in repo to read PlantUML source files from
       default: /input_directory
@@ -40,6 +41,7 @@ runs:
       shell: bash
       env:
         WIKI_TOKEN: ${{ inputs.WIKI_TOKEN }}
+        GHAPP_TOKEN: ${{ inputs.GHAPP_TOKEN }}
         INPUT_DIR: ${{ inputs.INPUT_DIR }}
         OUTPUT_DIR: ${{ inputs.OUTPUT_DIR }}
         IMAGE_TYPE: ${{ inputs.IMAGE_TYPE }}
