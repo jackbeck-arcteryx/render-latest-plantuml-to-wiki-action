@@ -11,7 +11,16 @@
 local_input_dir=$INPUT_DIR
 local_output_dir="output"
 
-artifacts_repo="https://${WIKI_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git"
+artifacts_repo=""
+if [[ ${WIKI_TOKEN != "" }]]; then
+  artifacts_repo="https://${WIKI_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git"
+elif [[ ${GHAPP_TOKEN} != "" ]]; then
+  artifacts_repo="https://x-access-token:${GHAPP_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git"
+else
+  echo "No token defined!"
+  exit 1
+fi
+
 artifacts_upload_dir=$OUTPUT_DIR
 
 git config --global user.name "$GITHUB_ACTOR"
@@ -62,7 +71,6 @@ echo "---"
 
 echo "=> Committing artifacts ..."
 cd "${GITHUB_WORKSPACE}/artifacts_repo"
-echo "---"
 
 # git status
 git add .
@@ -77,6 +85,7 @@ if git commit -m"Auto-generated PlantUML diagrams"; then
 else
     echo "(i) Nothing changed since previous build. The wiki is already up to date and therefore nothing is being pushed."
 fi
+echo "---"
 
 # Print success message:
 echo "=> Done."
