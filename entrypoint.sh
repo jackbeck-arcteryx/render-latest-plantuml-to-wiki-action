@@ -12,13 +12,13 @@ local_input_dir=$INPUT_DIR
 local_output_dir="output"
 
 artifacts_repo=""
-if [[ ${WIKI_TOKEN != "" }]]; then
-  artifacts_repo="https://${WIKI_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git"
+if [[ ${WIKI_TOKEN} != "" ]]; then
+	artifacts_repo="https://${WIKI_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git"
 elif [[ ${GHAPP_TOKEN} != "" ]]; then
-  artifacts_repo="https://x-access-token:${GHAPP_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git"
+	artifacts_repo="https://x-access-token:${GHAPP_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git"
 else
-  echo "No token defined!"
-  exit 1
+	echo "No token defined!"
+	exit 1
 fi
 
 artifacts_upload_dir=$OUTPUT_DIR
@@ -32,8 +32,8 @@ echo "---"
 
 echo "=> Downloading PlantUML Java app ..."
 if [ ! -f plantuml.jar ]; then
-    wget --quiet -O plantuml.zip https://sourceforge.net/projects/plantuml/files/latest/download
-    unzip plantuml.zip
+	wget --quiet -O plantuml.zip https://sourceforge.net/projects/plantuml/files/latest/download
+	unzip plantuml.zip
 fi
 echo "---"
 
@@ -58,9 +58,9 @@ echo "---"
 echo "=> Cloning wiki repository ..."
 git clone "$artifacts_repo" "${GITHUB_WORKSPACE}/artifacts_repo"
 if [ $? -gt 0 ]; then
-    echo "   ERROR: Could not clone repo."
-    echo "   Note: you need to initialize the wiki by creating at least one page before you can use this action!"
-    exit 1
+	echo "   ERROR: Could not clone repo."
+	echo "   Note: you need to initialize the wiki by creating at least one page before you can use this action!"
+	exit 1
 fi
 echo "---"
 
@@ -76,14 +76,14 @@ cd "${GITHUB_WORKSPACE}/artifacts_repo"
 git add .
 
 if git commit -m"Auto-generated PlantUML diagrams"; then
-    echo "=> Pushing artifacts ..."
-    git push
-    if [ $? -gt 0 ]; then
-        echo "   ERROR: Could not push to repo."
-        exit 1
-    fi
+	echo "=> Pushing artifacts ..."
+	git push
+	if [ $? -gt 0 ]; then
+		echo "   ERROR: Could not push to repo."
+		exit 1
+	fi
 else
-    echo "(i) Nothing changed since previous build. The wiki is already up to date and therefore nothing is being pushed."
+	echo "(i) Nothing changed since previous build. The wiki is already up to date and therefore nothing is being pushed."
 fi
 echo "---"
 
