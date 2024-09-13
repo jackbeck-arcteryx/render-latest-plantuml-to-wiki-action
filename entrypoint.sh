@@ -43,6 +43,8 @@ echo "---"
 
 # Run PlantUML for each file path:
 echo "=> Starting render process in $local_input_dir..."
+echo "Debug:"
+echo " - output: ${GITHUB_WORKSPACE}/${local_output_dir}"
 java -jar plantuml.jar -charset UTF-8 "$JAVA_ARGS" -t"$IMAGE_TYPE" -output "${GITHUB_WORKSPACE}/${local_output_dir}" "${GITHUB_WORKSPACE}/${local_input_dir}"
 echo "---"
 
